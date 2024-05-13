@@ -1,6 +1,6 @@
 import os 
 
-''' def contar_archivos(ruta):
+def contar_archivos(ruta):
     archivos = 0
     dicto = 0
     
@@ -17,15 +17,4 @@ import os
 
 rutix = "D:\Downloads\helloo"
 objeto = contar_archivos(rutix)
-print(objeto)'''
-
-import os
-
-# Ruta del directorio raíz que quieres explorar
-directorio_raiz = "D:\Downloads\helloo"
-
-# Iterar sobre el árbol de directorios utilizando os.walk()
-for directorio_actual, subdirectorios, archivos in os.walk(directorio_raiz):
-    print("Directorio actual:", directorio_actual)
-    print("Subdirectorios:", subdirectorios)
-    print("Archivos:", archivos)
+print(objeto)

@@ -119,3 +119,71 @@ print("Directorio eliminado:", new_dir)
 
 ```
 
+# EJERCICIOS 
+
+## 1. Contar archivos en una ruta 
+
+```python
+import os 
+
+def contar_archivos(ruta):
+    archivos = 0
+    dicto = 0
+    
+    contenido = os.listdir(ruta)    
+    for i in contenido:
+        if os.path.isfile(ruta + "/" + i):
+            archivos += 1
+            print("Se ha encontrado un archivo")
+        elif os.path.isdir(ruta + "/" + i):
+            dicto += 1
+            print("Se ha encontrado un directorio")
+    return f"El total  de archivos son {archivos}, y directorios son {dicto}"      
+        
+
+rutix = "D:\Downloads\helloo"
+objeto = contar_archivos(rutix)
+print(objeto)
+```
+
+## 2. Leer archivos con cierta extensión
+
+```python 
+import os 
+import pdb
+
+def archivos_con_extension(ruta, extension):
+    archivos_extension = []
+    
+    for directorio, subdirectorio, archivo in os.walk(ruta):
+        for i in archivo:
+            if i.endswith(extension):
+                archivos_extension.append(i)
+    return archivos_extension
+
+directorio_raiz = "D:\Downloads\helloo"
+exte = ".txt"
+objeto = archivos_con_extension(directorio_raiz, exte)
+print("Los archivos encontrados son:",  objeto)
+```
+
+## 3. Cambiar el nombre de cierta ruta
+```python
+import os
+
+def cambiar_nombre(ruta):
+    contador = 1 
+    nombre = os.listdir(ruta)
+    
+    for i in nombre:
+        nombre_nuevo = str(contador) + "_" + i
+        ruta_vieja = os.path.join(ruta, i)
+        ruta_neuva = os.path.join(ruta, nombre_nuevo)
+        os.rename(ruta_vieja, ruta_neuva)
+        contador += 1
+    return "Se ha cambiado el nombre de los archivos"
+directorio_raiz = "D:\Downloads\helloo"    
+nuevo = cambiar_nombre(directorio_raiz)
+print(nuevo)
+
+```

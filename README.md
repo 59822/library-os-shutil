@@ -118,6 +118,28 @@ os.rmdir(new_dir)
 print("Directorio eliminado:", new_dir)
 
 ```
+### os.path.getsize()
+Permite encontrar el tamaño de los archivos
+
+## USO DE TIME 
+```python 
+import os.path
+import time
+
+# Ruta del archivo que deseas analizar
+archivo = "/ruta/a/tu/archivo.txt"
+
+# Obtener la fecha de modificación del archivo en forma de marca de tiempo
+fecha_modificacion_timestamp = os.path.getmtime(archivo)
+
+# Convertir la marca de tiempo a una fecha legible
+fecha_modificacion = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(fecha_modificacion_timestamp))
+
+# Imprimir la fecha de modificación
+print("Fecha de modificación del archivo:", fecha_modificacion)
+
+
+```
 
 # EJERCICIOS 
 
@@ -186,4 +208,91 @@ directorio_raiz = "D:\Downloads\helloo"
 nuevo = cambiar_nombre(directorio_raiz)
 print(nuevo)
 
+```
+
+### 4. Listar archivos en un directorio y contar cuántos son archivos CSV:
+
+```python
+import os
+
+def listar_archivos(ruta):
+    ruta = os.listdir(ruta)
+    contador = 0
+    
+    for i in ruta:
+        if i.endswith(".CSV"):
+            contador +=1
+    return contador
+
+directorio = "D:\Downloads\helloo"
+listado = listar_archivos(directorio)
+print("El total de archivos CSV son:", listado)        
+```
+### 5. Calcular el tamaño promedio de archivos en un directorio:
+Uso de os.path.getsize() para encontrar el tamaño
+```python 
+import os
+
+def promedio_archivos(ruta):
+    tamaño = 0
+    numero_archivos = 0
+    
+    for directorio, subdirectorio, archivo in os.walk(ruta):
+        for i in archivo:
+            tamaño+= os.path.getsize(os.path.join(directorio, i))
+            numero_archivos += 1
+    
+    return f"El tamaño promedio de los archivos es: {tamaño/numero_archivos} bytes"
+
+directorio_raiz = "D:\Downloads\helloo"
+objeto = promedio_archivos(directorio_raiz)
+print(objeto) 
+```
+### 6. Encontrar el archivo más reciente en un directorio:
+Utilizamos getmtime para encontrar el tiempo
+
+```python
+import os 
+
+def archivo_reciente(ruta):
+    linea = os.listdir(ruta)
+    reciente = None
+    fecha = 0
+    
+    for directorio, subdirectorio, archivo in os.walk(ruta):
+        for i in archivo:
+            ner_rute = os.path.join(directorio, i)
+            fechamodificada = os.path.getmtime(ner_rute)
+            if fechamodificada > fecha:
+                fecha = fechamodificada
+                reciente = i
+    return reciente
+
+ruta = "D:\Downloads\helloo"
+objeto = archivo_reciente(ruta)
+print("El archivo más reciente es:", objeto)
+
+```
+### 7. Crear un informe de resumen de archivos en un directorio:
+Utilizamos la libreria time, y en ella utilizamos time.strftime ppara darle formato a la fecha y time.localtime para convertir la fecha en tiempo local
+
+```python
+import os
+import time
+
+def informe(ruta):
+    rute = os.listdir(ruta)
+    
+    for directorio, subdirectorio, archivo in os.walk(ruta):
+        for i in archivo:
+            nombre = i
+            tamaño = os.path.getsize(os.path.join(directorio, i))
+            fecha = os.path.getmtime(os.path.join(directorio, i))
+            fecha_Editada =  time.strftime("%m/%d/%Y, %H:%M:%S", time.localtime(fecha))
+            print(f"Nombre del archivo: {nombre}, Tamaño: {tamaño} bytes, Fecha de modificación: {fecha_Editada}")
+            
+ruta = "D:\Downloads\helloo"
+objeto = informe(ruta)
+print(objeto)
+            # 
 ```
